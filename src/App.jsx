@@ -3,14 +3,15 @@ import Home from "./pages/Home/Home";
 import PhotoPage from "./pages/PhotoPage/PhotoPage";
 import { createContext, useState } from "react";
 
-const PhotoFavoriteContext = createContext();
+const SearchImgsContext = createContext();
+
 
 function App() {
-  const [numberPhotosFavorites] = useState(0);
+  const [searchImgs, setSearchImgs] = useState(0);
 
 
   return (
-    <PhotoFavoriteContext.Provider value={numberPhotosFavorites}>
+    <SearchImgsContext.Provider value={{ searchImgs, setSearchImgs }}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -19,9 +20,9 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
-    </PhotoFavoriteContext.Provider>
+    </SearchImgsContext.Provider>
   );
 }
 
-export { PhotoFavoriteContext };
+export { SearchImgsContext };
 export default App;
