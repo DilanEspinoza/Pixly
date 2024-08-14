@@ -5,8 +5,8 @@ const url_base = import.meta.env.VITE_URL_BASE;
 
 export const useFetch = (query) => {
 	const [data, setData] = useState([]);
-	// const [error, setError] = useState(null);
-	// const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const getImages = async () => {
@@ -18,16 +18,15 @@ export const useFetch = (query) => {
 				});
 				let result = await response.json();
 				setData(result.photos);
-				// setLoading(false);
+				setLoading(false);
 			} catch (error) {
-				// setLoading(false);
-				// setError("hubo un error al llamar la api");
+				setLoading(false);
+				setError("hubo un error al intentar obtener las imagenes");
 				console.log(error);
 			}
 		};
 		getImages();
 	}, [query]);
 
-	// return { data, loading, error };
-	return { data };
+	return { data, loading, error };
 };
