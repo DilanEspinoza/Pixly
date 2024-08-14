@@ -10,7 +10,25 @@ import { SearchImgsContext } from "../../App";
 const Home = () => {
     const { searchImgs } = useContext(SearchImgsContext);
 
-    const { data } = useFetch(searchImgs)
+    const { data, loading, error } = useFetch(searchImgs)
+
+
+    if (loading) {
+        return (
+            <div >
+                Loading...
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="bg-red-500 w-2/3">
+                Error: {error.message}
+            </div>
+        );
+    }
+
 
     return (
         <>
