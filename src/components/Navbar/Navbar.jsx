@@ -1,12 +1,18 @@
 import { useContext, useState } from "react";
 import { IoMdSearch, IoIosArrowDown, IoIosArrowUp, IoMdHeartEmpty } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { PhotoFavoriteContext } from "../../App";
+import { SearchImgsContext } from "../../App";
 
 
 const Navbar = () => {
-    const photosFavorites = useContext(PhotoFavoriteContext)
+
+    const { setSearchImgs } = useContext(SearchImgsContext);
+
+    const [valueInputSearch, setValueInputSearch] = useState("")
+
     const [buttonForm, setButtonForm] = useState(true)
+
+    const handleOnChange = ({ target }) => setValueInputSearch(target.value)
 
     const handleButtonFrom = () => {
         setButtonForm(!buttonForm)
@@ -14,23 +20,36 @@ const Navbar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setSearchImgs(valueInputSearch)
     }
 
     return <>
         <nav className="w-screen flex justify-between py-3 px-7 items-center gap-5 ">
             <div className=" flex w-3/5  gap-10">
                 <a href="/" className="text-3xl">pixly</a>
-                <form className="flex items-center justify-between gap-2 rounded-xl flex-1 bg-gray-200" onSubmit={handleSubmit}>
+                <form
+                    className="flex items-center justify-between gap-2 rounded-xl flex-1 bg-gray-200"
+                    onSubmit={handleSubmit}>
+
                     <div className=" mx-3 flex gap-1 w-4/5">
-                        <button>
+                        <button type="submit">
                             <IoMdSearch />
                         </button>
-                        <input type="text" className="w-full outline-none border-none bg-gray-200 p-1.5" placeholder="Search free photos" />
+                        <input
+                            type="text"
+                            placeholder="Search free photos"
+                            onChange={handleOnChange}
+                            className="w-full outline-none border-none bg-gray-200 p-1.5"
+                        />
+
                     </div>
 
 
                     <div className="relative">
-                        <button className="flex gap-1 items-center hover:bg-gray-300 p-1.5 rounded-xl" onClick={handleButtonFrom}>
+                        <button
+                            className="flex gap-1 items-center hover:bg-gray-300 p-1.5 rounded-xl"
+                            type="button"
+                            onClick={handleButtonFrom}>
                             All images
                             <span className="">
                                 {buttonForm ? <IoIosArrowDown /> : <IoIosArrowUp />}
@@ -58,10 +77,10 @@ const Navbar = () => {
                         <Link to="/favorites">
                             <IoMdHeartEmpty className="text-2xl " />
                         </Link>
-                        <span className={`${photosFavorites === 0 ? "hidden" : "absolute -right-1 top-3.5 h-3 w-3 bg-red-500 p-2 rounded-full flex justify-center items-center text-white"}`}>
+                        {/*  <span className={`${photosFavorites === 0 ? "hidden" : "absolute -right-1 top-3.5 h-3 w-3 bg-red-500 p-2 rounded-full flex justify-center items-center text-white"}`}>
 
                             {photosFavorites}
-                        </span>
+                        </span> */}
                     </div>
                 </li>
             </ul>
