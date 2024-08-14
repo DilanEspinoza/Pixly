@@ -14,7 +14,7 @@ const PhotoCard = ({ url_photo, id }) => {
                         <MdFavorite className="text-white" />
                     </button>
                     <Link to={`/photos/${id}`}>
-                        <img src={url_photo} className="bg-slate-600 w-full h-full object-cover max-w-full mb- block" alt="" />
+                        <img src={url_photo} className="bg-slate-600 w-full h-full object-cover max-w-full mb-5 block" alt="" />
                     </Link>
                 </div>
             </article>
