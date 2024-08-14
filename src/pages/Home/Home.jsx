@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import Navbar from "../../components/Navbar/Navbar"
 import PhotoCard from "../../components/PhotoCard/PhotoCard"
 import { useFetch } from "../../hooks/useFetch"
+import { SearchImgsContext } from "../../App";
+
 
 
 
 const Home = () => {
-    // const { data, loading, error } = useFetch("nature")
-    const { data } = useFetch("nature")
+    const { searchImgs } = useContext(SearchImgsContext);
 
-    console.log(data)
+    const { data } = useFetch(searchImgs)
+
     return (
         <>
             <Navbar />
