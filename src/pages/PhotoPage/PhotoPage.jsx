@@ -13,12 +13,11 @@ function PhotoPage() {
     const { photo_id } = useParams()
 
     const { data, loading, error } = useGetImage(photo_id)
-    console.log(data)
 
     if (loading) {
         return (
-            <div className="bg-slate-100 w-2/3">
-                Cargando...
+            <div >
+                Loading...
             </div>
         );
     }
